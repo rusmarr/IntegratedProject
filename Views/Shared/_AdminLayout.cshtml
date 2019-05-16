@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="Mara Russell" content="">
+        <title>BirdTown Buttons</title>
+        <!-- Font Awesome Icons -->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+        <!-- Plugin CSS -->
+        <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+        <!-- Theme CSS - Includes Bootstrap -->
+        <link href="css/creative.css" rel="stylesheet">
+        <link href="~/Content/ErrorStyles.css" rel=" stylesheet" />
+        <link href="~/Scripts/jquery.validate.js" />
+    <link href="~/Scripts/jquery.validate.unobtrusive.js" />
+    
+    
+</head>
+<body>
+    <div>
+        @if(TempData["message"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["message"]
+            </div>
+        }
+        @RenderBody()
+    
+    </div>
+</body>
+</html>

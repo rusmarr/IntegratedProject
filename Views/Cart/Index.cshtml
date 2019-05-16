@@ -1,0 +1,108 @@
+﻿@model Buttons.WebUI.Models.CartIndexViewModel
+    @{ 
+        ViewBag.Title = "Buttons: Your Cart";
+    }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="Mara Russell" content="">
+    <title>BirdTown Buttons</title>
+    <!-- Font Awesome Icons -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <!-- Theme CSS - Includes Bootstrap -->
+    <link href="css/creative.css" rel="stylesheet">
+</head>
+<style>
+    #CartTable td{
+        vertical-align:middle;
+    }
+</style>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">BirdTown Buttons</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Product/Index">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Product/Index">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Account/Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Account/Register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Product/Index">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h2>
+        Your Cart
+    </h2>
+
+    <table id="CartTable" class="table">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Item</th>
+                <th class="text-right"> Price</th>
+                <th class="text-right"> Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Cart.Lines)
+            {
+                <tr>
+                    <td class="text-right">@line.Quantity</td>
+                    <td class="text-left">@line.Product.Name</td>
+                    <td class=" text-right">@line.Product.Price.ToString("c")</td>
+                    <td class="text-light">@((line.Quantity * @line.Product.Price).ToString("c"))</td>
+                    <td>
+                        @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                        {
+                            @Html.Hidden("ProductID", line.Product.ProductID)
+                            @Html.HiddenFor(x => x.ReturnUrl)
+                            <input class="btn btn-warning" type="submit" value="Remove" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">
+                    @Model.Cart.ComputeTotalValue().ToString("c")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="text-center">
+        <a class="btn btn-primary" href="@Model.ReturnUrl">
+            Continue Shopping
+        </a>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.js"></script>
+</body>
